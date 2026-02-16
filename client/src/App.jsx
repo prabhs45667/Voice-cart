@@ -209,6 +209,7 @@ export default function App() {
             setItems(prev => { const ex = prev.find(i => i._id === newItem._id); return ex ? prev.map(i => i._id === newItem._id ? newItem : i) : [newItem, ...prev]; });
             const msg = `Added ${p.quantity || 1} ${p.unit || ''} ${newItem.name}`;
             toast.success(`✅ ${msg}`, { id: 'proc' });
+            setMobileCartOpen(true);
             return msg;
         } catch (err) {
             if (err.response?.data?.error === 'not_in_catalogue') {
