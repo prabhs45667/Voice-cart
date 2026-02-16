@@ -1,7 +1,12 @@
 import axios from 'axios';
 
 // Force rebuild for CORS fix
-const API_BASE = import.meta.env.VITE_API_URL || (import.meta.env.PROD ? 'https://voice-cart-t57u.onrender.com/api' : '/api');
+const PROD_API = 'https://voice-cart-t57u.onrender.com/api';
+let apiBase = import.meta.env.VITE_API_URL || (import.meta.env.PROD ? PROD_API : '/api');
+if (apiBase.startsWith('http') && !apiBase.endsWith('/api')) {
+    apiBase += '/api';
+}
+const API_BASE = apiBase;
 
 const api = axios.create({
     baseURL: API_BASE,
