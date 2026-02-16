@@ -329,7 +329,25 @@ function ruleBasedParse(transcript) {
     for (const pat of SEARCH_PATTERNS) {
         const m = text.match(pat);
         if (m) {
-            return { intent: 'search', item: m[1].trim(), quantity: 1, unit: '', category: '', clarification: '' };
+            let itemSearch = m[1].trim();
+            // check for price filter: "under 500", "below 100", "500 tak", "sasta"
+            let maxPrice = null;
+            const pricePatterns = [
+                /(?:under|below|less\s+than|sasta|kam)\s+(?:rs\.?|inr|₹)?\s*(\d+)/i,
+                /(\d+)\s*(?:rupees|rs|ka|mein|tak|wala|wali)\s*$/i // "500 tak", "500 wala"
+            ];
+
+            for (const pp of pricePatterns) {
+                const pm = itemSearch.match(pp);
+                if (pm) {
+                    maxPrice = parseInt(pm[1]);
+                    // remove price part from item name
+                    itemSearch = itemSearch.replace(pp, '').replace(/(?:in|for|at|with)\s*$/, '').trim();
+                    break;
+                }
+            }
+
+            return { intent: 'search', item: itemSearch, quantity: 1, unit: '', category: '', maxPrice, clarification: '' };
         }
     }
 
