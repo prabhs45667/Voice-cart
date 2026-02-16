@@ -507,10 +507,12 @@ export default function App() {
                 </div>
 
                 {/* ═══ CART SIDEBAR ═══ */}
-                <div className="cart-sidebar">
+                <div className={`cart-sidebar ${mobileCartOpen ? 'mobile-open' : ''}`}>
                     <div className="cart-panel">
                         <div className="cart-panel-header">
                             <h2>🛒 My Cart {totalItems > 0 && <span className="cart-count">{totalItems}</span>}</h2>
+                            <button className="cart-mobile-close" onClick={() => setMobileCartOpen(false)}
+                                style={{ marginLeft: 'auto', background: 'none', fontSize: 24, padding: 8, display: mobileCartOpen ? 'block' : 'none' }}>✕</button>
                         </div>
                         <div className="cart-panel-body">
                             {loading ? (
