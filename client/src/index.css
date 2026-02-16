@@ -1327,43 +1327,51 @@ button {
   /* Compact Header */
   .header-logo-text {
     display: none;
-    /* Hide text, keep icon */
   }
 
   .header-search {
     flex: 1;
-    max-width: 100%;
-    /* Take available space */
+    max-width: 160px;
+    /* Limit width */
+    margin-right: 8px;
   }
 
   .header-search input {
-    padding: 8px 12px 8px 32px;
+    padding: 6px 8px 6px 30px;
     font-size: 13px;
+    height: 36px;
   }
 
   .header-search-icon {
-    left: 10px;
+    left: 8px;
     font-size: 14px;
+    top: 50%;
+    transform: translateY(-50%);
   }
 
-  /* Hide extra buttons on mobile */
+  /* Show buttons on mobile now */
   .header-icon-btn,
   .cart-btn {
-    display: none;
+    display: flex;
+    padding: 6px;
+    width: 36px;
+    height: 36px;
   }
 
-  /* User Profile: Icon Only */
+  .cart-btn span {
+    display: none;
+    /* Hide 'Cart' text, keep icon */
+  }
+
   .header-user-btn {
     padding: 4px;
     width: 32px;
     height: 32px;
     border-radius: 50%;
-    justify-content: center;
   }
 
   .header-user-btn span {
-    font-size: 0;
-    /* Hide text */
+    display: none;
   }
 
   .header-user-btn .header-user-avatar {

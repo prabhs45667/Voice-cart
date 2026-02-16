@@ -5,7 +5,6 @@
  */
 
 const CATALOGUE = [
-    // ═══ 🥛 DAIRY (20 items) ═══
     { id: 'milk-amul-gold', name: 'Amul Gold Milk', price: 66, mrp: 70, category: 'Dairy', defaultUnit: 'liter', tags: ['milk', 'doodh', 'full cream', 'amul gold'] },
     { id: 'milk-amul-toned', name: 'Amul Taaza (Toned)', price: 54, mrp: 58, category: 'Dairy', defaultUnit: 'liter', tags: ['milk', 'toned milk', 'amul taaza'] },
     { id: 'milk-mother-dairy', name: 'Mother Dairy Milk', price: 64, mrp: 68, category: 'Dairy', defaultUnit: 'liter', tags: ['milk', 'full cream', 'mother dairy'] },
@@ -111,8 +110,6 @@ const CATALOGUE = [
     { id: 'shampoo-clinic', name: 'Clinic Plus', price: 80, mrp: 100, category: 'Personal Care', defaultUnit: 'bottle', tags: ['shampoo', 'family'] },
     { id: 'facewash-himalaya', name: 'Himalaya Neem Face Wash', price: 140, mrp: 170, category: 'Personal Care', defaultUnit: 'tube', tags: ['face wash', 'anti acne', 'himalaya'] },
     { id: 'facewash-garnier', name: 'Garnier Men Face Wash', price: 150, mrp: 180, category: 'Personal Care', defaultUnit: 'tube', tags: ['face wash', 'men'] },
-
-    // ═══ ☕ BEVERAGES ═══
     { id: 'tea-tata', name: 'Tata Tea Gold', price: 130, mrp: 150, category: 'Beverages', defaultUnit: 'packet', tags: ['tea', 'chai', 'tata'] },
     { id: 'tea-redlabel', name: 'Red Label Tea', price: 125, mrp: 145, category: 'Beverages', defaultUnit: 'packet', tags: ['tea', 'chai', 'red label'] },
     { id: 'coffee-nescafe', name: 'Nescafe Classic', price: 180, mrp: 210, category: 'Beverages', defaultUnit: 'jar', tags: ['coffee', 'instant'] },
@@ -121,7 +118,6 @@ const CATALOGUE = [
     { id: 'drink-thumsup', name: 'Thums Up (1.25L)', price: 60, mrp: 65, category: 'Beverages', defaultUnit: 'bottle', tags: ['cold drink', 'toofani'] },
     { id: 'juice-real', name: 'Real Mixed Fruit', price: 110, mrp: 130, category: 'Beverages', defaultUnit: 'packet', tags: ['juice', 'fruit juice'] },
 
-    // ═══ 🏠 HOUSEHOLD ═══
     { id: 'det-surf', name: 'Surf Excel Matic', price: 240, mrp: 280, category: 'Household', defaultUnit: 'packet', tags: ['detergent', 'washing powder'] },
     { id: 'det-tide', name: 'Tide Plus', price: 110, mrp: 140, category: 'Household', defaultUnit: 'packet', tags: ['detergent', 'tide'] },
     { id: 'dish-vim-bar', name: 'Vim Dishwash Bar', price: 20, mrp: 25, category: 'Household', defaultUnit: 'bar', tags: ['dishwash', 'vim'] },

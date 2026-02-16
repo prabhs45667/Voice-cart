@@ -5,9 +5,7 @@ const { getRecommendations } = require('./recommendationEngine');
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash' });
 
-// ═══════════════════════════════════════════════════════════════
 // HINDI → ENGLISH ITEM DICTIONARY (phonetic variants included)
-// ═══════════════════════════════════════════════════════════════
 const HINDI_ITEMS = {
     // dairy
     doodh: 'milk', dudh: 'milk', dhoodh: 'milk',
@@ -98,9 +96,7 @@ const HINDI_ITEMS = {
     toothpaste: 'toothpaste',
 };
 
-// ═══════════════════════════════════════════════════════════════
-// DEVANAGARI → ROMANIZED HINDI (for when Speech API returns Hindi script)
-// ═══════════════════════════════════════════════════════════════
+// DEVANAGARI → ROMANIZED HINDI
 const DEVANAGARI_ITEMS = {
     // common phrases
     'मुझे': 'mujhe', 'चाहिए': 'chahiye', 'दो': 'do', 'एक': 'ek', 'दे': 'de',
@@ -165,9 +161,7 @@ function transliterateDevanagari(text) {
     return result;
 }
 
-// ═══════════════════════════════════════════════════════════════
 // HINDI NUMBER WORDS
-// ═══════════════════════════════════════════════════════════════
 const HINDI_NUMBERS = {
     ek: 1, do: 2, teen: 3, char: 4, paanch: 5, panch: 5,
     chhe: 6, cheh: 6, saat: 7, aath: 8, nau: 9, das: 10,
@@ -176,9 +170,7 @@ const HINDI_NUMBERS = {
     dedh: 1.5, dhai: 2.5,
 };
 
-// ═══════════════════════════════════════════════════════════════
 // UNIT ALIASES
-// ═══════════════════════════════════════════════════════════════
 const UNIT_MAP = {
     kg: 'kg', kilo: 'kg', kilogram: 'kg', kilograms: 'kg',
     gram: 'kg', grams: 'kg', gm: 'kg', g: 'kg', // will adjust qty
@@ -224,10 +216,7 @@ const SEARCH_PATTERNS = [
     /^(.+?)\s+(?:search|find|dhundho|dikhao|khojo)\s*$/i,
 ];
 
-// ═══════════════════════════════════════════════════════════════
 // RULE-BASED PARSER — handles ADD, REMOVE, CLEAR, SEARCH
-// Works without Gemini. Used as pre-processor AND fallback.
-// ═══════════════════════════════════════════════════════════════
 
 function ruleBasedParse(transcript) {
     // first: transliterate any Devanagari script to romanized Hindi
@@ -533,10 +522,7 @@ function findLocalSubstitutes(query) {
     return scored.map(p => ({ item: p.name, price: p.price, reason: `Similar to "${query}"` }));
 }
 
-// ═══════════════════════════════════════════════════════════════
 // MAIN NLP ENTRY POINT
-// Rule-based first → Gemini for complex → Rule-based fallback
-// ═══════════════════════════════════════════════════════════════
 
 async function parseVoiceCommand(transcript) {
     // STEP 1: Rule-based parser (instant, no AI)
@@ -631,9 +617,7 @@ async function categorizeItem(itemName) {
 // FREE-TIER SUGGESTIONS (no AI dependency)
 // ═══════════════════════════════════════════════════════════════
 
-// ═══════════════════════════════════════════════════════════════
-// DYNAMIC SUGGESTIONS (Powered by Recommendation Engine)
-// ═══════════════════════════════════════════════════════════════
+// DYNAMIC SUGGESTIONS
 
 async function generateSuggestions(historyItems, currentItems) {
     // Delegate to the advanced recommendation engine

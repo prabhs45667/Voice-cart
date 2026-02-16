@@ -24,12 +24,10 @@ const CATEGORY_DATA = {
 const VOICE_TIPS = [
     { icon: '🛒', text: '<strong>"Add 1 kg aloo"</strong> — add with unit' },
     { icon: '🗑️', text: '<strong>"Remove eggs"</strong> — remove item' },
-    { icon: '🧹', text: '<strong>"Clear my list"</strong> — empty cart' },
-    { icon: '🔍', text: '<strong>"Search paneer"</strong> — find products' },
+    { icon: '🔍', text: '<strong>"Search rice under 100"</strong> — price filter' },
+    { icon: '�', text: '<strong>"Stop"</strong> — end session' },
     { icon: '🇮🇳', text: '<strong>"मुझे दूध चाहिए"</strong> — Hindi works!' },
-    { icon: '⚖️', text: '<strong>"Half kg tomato"</strong> — fraction qty' },
-    { icon: '🥚', text: '<strong>"1 dozen eggs"</strong> — dozen unit' },
-    { icon: '📦', text: '<strong>"2 packet Maggi"</strong> — packet unit' },
+    { icon: '🧹', text: '<strong>"Clear my list"</strong> — empty cart' },
 ];
 
 // Helper for dynamic images
@@ -91,8 +89,6 @@ export default function App() {
     async function loadSuggestions() {
         try { setSuggestions(await getSuggestions()); } catch (e) { console.error(e); }
     }
-
-    // ═══ VOICE COMMAND ═══
 
     function speak(text, onEnd) {
         if (!text) { if (onEnd) onEnd(); return; }
@@ -317,14 +313,12 @@ export default function App() {
         return s;
     }, 0);
 
-    // ═══ LOGIN SCREEN ═══
     if (!user) return <LoginPage onLogin={setUser} />;
 
     return (
         <div style={{ minHeight: '100vh', background: 'var(--bg-primary)' }}>
             <Toaster position="top-center" toastOptions={{ style: { background: '#fff', color: '#1a1a2e', border: '1px solid #e5e7eb', fontSize: '13px', fontWeight: 500, borderRadius: '12px', boxShadow: '0 8px 24px rgba(0,0,0,0.12)' } }} />
 
-            {/* ═══ HEADER ═══ */}
             <header className="app-header">
                 <div className="header-inner">
                     <div className="header-logo">
@@ -357,7 +351,6 @@ export default function App() {
                 </div>
             </header>
 
-            {/* ═══ CATEGORY STRIP ═══ */}
             <nav className="category-strip">
                 <div className="category-strip-inner">
                     {Object.entries(CATEGORY_DATA).map(([key, val]) => (
@@ -369,7 +362,6 @@ export default function App() {
                 </div>
             </nav>
 
-            {/* ═══ MAIN LAYOUT ═══ */}
             <div className="app-main">
                 <div className="main-content">
 
@@ -507,7 +499,6 @@ export default function App() {
                     )}
                 </div>
 
-                {/* ═══ CART SIDEBAR ═══ */}
                 <div className={`cart-sidebar ${mobileCartOpen ? 'mobile-open' : ''}`}>
                     <div className="cart-panel">
                         <div className="cart-panel-header">
@@ -576,7 +567,6 @@ export default function App() {
     );
 }
 
-/* ═══ PRODUCT CARD ═══ */
 function ProductCard({ product, inCart, onAdd, onUpdateQty }) {
     const cat = CATEGORY_DATA[product.category] || { icon: '📦' };
     const discount = product.mrp && product.mrp > product.price
