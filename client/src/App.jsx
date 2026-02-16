@@ -24,10 +24,14 @@ const CATEGORY_DATA = {
 const VOICE_TIPS = [
     { icon: '🛒', text: '<strong>"Add 1 kg aloo"</strong> — add with unit' },
     { icon: '🗑️', text: '<strong>"Remove eggs"</strong> — remove item' },
-    { icon: '🔍', text: '<strong>"Search rice under 100"</strong> — price filter' },
-    { icon: '�', text: '<strong>"Stop"</strong> — end session' },
-    { icon: '🇮🇳', text: '<strong>"मुझे दूध चाहिए"</strong> — Hindi works!' },
     { icon: '🧹', text: '<strong>"Clear my list"</strong> — empty cart' },
+    { icon: '🔍', text: '<strong>"Search paneer"</strong> — find products' },
+    { icon: '💰', text: '<strong>"Search rice under 100"</strong> — price filter' },
+    { icon: '🛑', text: '<strong>"Stop"</strong> — end session' },
+    { icon: '🇮🇳', text: '<strong>"मुझे दूध चाहिए"</strong> — Hindi works!' },
+    { icon: '⚖️', text: '<strong>"Half kg tomato"</strong> — fraction qty' },
+    { icon: '🥚', text: '<strong>"1 dozen eggs"</strong> — dozen unit' },
+    { icon: '📦', text: '<strong>"2 packet Maggi"</strong> — packet unit' },
 ];
 
 // Helper for dynamic images
