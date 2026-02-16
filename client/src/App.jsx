@@ -78,7 +78,7 @@ export default function App() {
     useEffect(() => { if (transcript && !isListening) handleVoiceCommand(transcript); }, [transcript, isListening]);
 
     async function loadItems() {
-        try { setLoading(true); setItems(await getItems()); } catch { toast.error('Could not load list'); } finally { setLoading(false); }
+        try { setLoading(true); setItems(await getItems()); } catch (e) { toast.error(`List Error: ${e.message}`); console.error(e); } finally { setLoading(false); }
     }
     async function loadCatalogue() {
         try {
