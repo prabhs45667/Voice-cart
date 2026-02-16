@@ -1324,16 +1324,59 @@ button {
     gap: 8px;
   }
 
-  .header-logo-text h1 {
-    font-size: 18px;
+  /* Compact Header */
+  .header-logo-text {
+    display: none;
+    /* Hide text, keep icon */
   }
 
   .header-search {
-    max-width: 200px;
+    flex: 1;
+    max-width: 100%;
+    /* Take available space */
+  }
+
+  .header-search input {
+    padding: 8px 12px 8px 32px;
+    font-size: 13px;
+  }
+
+  .header-search-icon {
+    left: 10px;
+    font-size: 14px;
+  }
+
+  /* Hide extra buttons on mobile */
+  .header-icon-btn,
+  .cart-btn {
+    display: none;
+  }
+
+  /* User Profile: Icon Only */
+  .header-user-btn {
+    padding: 4px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    justify-content: center;
+  }
+
+  .header-user-btn span {
+    font-size: 0;
+    /* Hide text */
+  }
+
+  .header-user-btn .header-user-avatar {
+    margin: 0;
+    width: 24px;
+    height: 24px;
+    font-size: 12px;
   }
 
   .main-content {
     padding: 12px;
+    padding-bottom: 80px;
+    /* Space for bottom cart bar */
   }
 
   .product-grid {
