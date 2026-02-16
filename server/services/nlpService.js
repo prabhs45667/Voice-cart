@@ -1,5 +1,6 @@
 const { GoogleGenerativeAI } = require('@google/generative-ai');
 const { findInCatalogue, fuzzyFindInCatalogue, searchCatalogue, CATALOGUE } = require('../data/catalogue');
+const { getRecommendations } = require('./recommendationEngine');
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash' });
@@ -630,69 +631,13 @@ async function categorizeItem(itemName) {
 // FREE-TIER SUGGESTIONS (no AI dependency)
 // ═══════════════════════════════════════════════════════════════
 
+// ═══════════════════════════════════════════════════════════════
+// DYNAMIC SUGGESTIONS (Powered by Recommendation Engine)
+// ═══════════════════════════════════════════════════════════════
+
 async function generateSuggestions(historyItems, currentItems) {
-    const currentNames = new Set((currentItems || []).map(i => i.name.toLowerCase()));
-    const suggestions = [];
-
-    // 1. History-based: most frequently bought, not already in cart
-    if (historyItems && historyItems.length > 0) {
-        const sorted = [...historyItems].sort((a, b) => b.count - a.count);
-        for (const h of sorted) {
-            if (suggestions.length >= 5) break;
-            if (currentNames.has(h.itemName.toLowerCase())) continue;
-            const match = findInCatalogue(h.itemName);
-            if (match) {
-                suggestions.push({
-                    item: match.name, price: match.price, category: match.category,
-                    reason: `Bought ${h.count}x before`,
-                });
-            }
-        }
-    }
-
-    // 2. Complementary items (if user has X, suggest Y)
-    const complements = {
-        'dal': ['rice', 'ghee', 'atta'],
-        'rice': ['dal', 'curd'],
-        'atta': ['ghee', 'oil'],
-        'bread': ['butter', 'eggs'],
-        'milk': ['tea', 'sugar'],
-        'tea': ['milk', 'sugar'],
-        'paneer': ['capsicum', 'onion', 'tomato'],
-        'maggi': ['eggs', 'onion'],
-    };
-    for (const item of (currentItems || [])) {
-        if (suggestions.length >= 8) break;
-        const key = Object.keys(complements).find(k => item.name.toLowerCase().includes(k));
-        if (key) {
-            for (const comp of complements[key]) {
-                if (suggestions.length >= 8) break;
-                if (currentNames.has(comp)) continue;
-                if (suggestions.find(s => s.item.toLowerCase().includes(comp))) continue;
-                const match = findInCatalogue(comp);
-                if (match && !currentNames.has(match.name.toLowerCase())) {
-                    suggestions.push({
-                        item: match.name, price: match.price, category: match.category,
-                        reason: `Goes well with ${item.name.split('(')[0].trim()}`,
-                    });
-                }
-            }
-        }
-    }
-
-    // 3. Seasonal defaults to fill remaining slots
-    if (suggestions.length < 5) {
-        const seasonal = getSeasonalDefaults();
-        for (const s of seasonal) {
-            if (suggestions.length >= 5) break;
-            if (currentNames.has(s.item.toLowerCase())) continue;
-            if (!suggestions.find(x => x.item === s.item)) {
-                suggestions.push(s);
-            }
-        }
-    }
-
-    return suggestions.slice(0, 8);
+    // Delegate to the advanced recommendation engine
+    return getRecommendations(currentItems || [], historyItems || []);
 }
 
 async function findSubstitutes(itemName) {
