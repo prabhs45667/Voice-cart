@@ -1,0 +1,24 @@
+Project Requirements
+====================
+
+Prerequisites:
+- Node.js (v18.0.0 or higher)
+- NPM (v9.0.0 or higher)
+- MongoDB (Local installation or MongoDB Atlas account)
+- Internet connection (Required for Google Gemini API)
+
+API Keys Required (.env):
+- Google Gemini API Key (Get from: https://aistudio.google.com/apikey)
+- MongoDB Connection String (MONGODB_URI)
+
+Installation:
+1. Clone the repository.
+2. Run `npm install` in the `server` directory.
+3. Run `npm install` in the `client` directory.
+4. Set up `.env` file in `server/` based on `.env.example`.
+
+Running the Project:
+- Backend: `npm run dev` (inside server folder)
+- Frontend: `npm run dev` (inside client folder)
+
+See README.md for detailed setup instructions.
