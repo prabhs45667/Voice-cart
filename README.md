@@ -2,11 +2,17 @@
 
 A smart, voice-powered shopping list manager that uses AI to understand natural language commands, auto-categorize items, and provide intelligent recommendations.
 
-> **Live Demo**: [your-vercel-url.vercel.app](https://your-vercel-url.vercel.app)
+> **Live Demo**: [voice-cart-drab.vercel.app](https://voice-cart-drab.vercel.app)
 
 ---
 
 ## ✨ Features
+
+### 🆕 New Features (Feb 2026)
+- **💰 Price Filtering** — "Search rice under ₹100" to filter by budget.
+- **🧠 Smart Recommendation Engine** — Multi-strategy suggestions (Pairings, History, Category, Seasonal).
+- **📦 Expanded Catalogue** — 120+ items with real Indian brands (Amul, Tata, Britannia).
+- **🛑 Enhanced Voice Control** — Say "Stop" to end session, or "Clear list" to empty cart.
 
 ### 🎤 Voice Input
 - **Speech Recognition** — Add, remove, and search items using natural voice commands
