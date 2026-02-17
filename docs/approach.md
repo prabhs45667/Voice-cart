@@ -1,17 +1,26 @@
-# My Approach
+# My Approach & Architecture
 
-**Core Philosophy**: VoiceCart is designed to be the fastest way to build a shopping list, leveraging voice for speed and AI for intelligence.
+**VoiceCart** is built on a **Voice-First Philosophy**, prioritizing speed and natural interaction over traditional UI flows.
 
-**Architecture**:
-- **Frontend**: React (Vite) for a responsive, dark-mode native feel.
-- **Voice**: Web Speech API for instant, zero-latency recognition.
-- **Backend/AI**: Node.js/Express + Google Gemini API.
-- **Database**: MongoDB Atlas for persistence and history tracking.
+### Technology Stack
+- **Frontend:** React 19 + Vite (Fast, component-based UI).
+- **Backend:** Node.js + Express (Robust API server).
+- **Database:** MongoDB Atlas (Flexible schema for product catalogue & history).
+- **Deployment:** Vercel (Frontend) + Render (Backend).
 
-**Key Implementations**:
-- **Smart Parsing**: A hybrid NLP engine first uses regex for speed ("Add 2kg potatoes"), backed by Gemini for complex intents like "Find toothpaste under $5" or Hindi translations ("Mujhe doodh chahiye").
-- **Intelligent Features**: The system auto-categorizes items, suggests substitutes if products are missing, and recommends frequently bought items based on history.
-- **Efficiency**: No login wall (instant demo access) and local substitutes ensuring usability even if AI falls back.
+### AI/ML & Natural Language Processing
+- **Hybrid NLP Engine:**
+  - **Rule-Based Parser (Regex):** Handles instant commands like "Add milk", "Clear list" for <100ms latency.
+  - **Google Gemini 1.5 Flash (LLM):** Processes complex intents, Hindi translations ("Mujhe doodh chahiye"), and price filtering ("Search rice under ₹100").
+- **Fuzzy Search:** Implements Levenshtein distance to tolerate typos (e.g., "biskit" -> "Biscuit").
 
-**Trade-offs**:
-Authentication was simplified to a demo user to focus on core voice UX and NLP accuracy within the 8-hour timeline. Deployment is ready for any Node.js compatible host like Render or Vercel.
+### Smart Algorithms
+- **Multi-Strategy Recommendation Engine:**
+  - Uses a **Weighted Scoring System** combining 4 strategies:
+    1.  **Co-occurrence Pairs** ({Pasta, Cheese}).
+    2.  **Category Expansion** ({Apple, Banana}).
+    3.  **User History** (Frequently bought items).
+    4.  **Seasonal Trends** ({Winter, Tea/Soup}).
+  - Deduplicates and ranks top 8 suggestions dynamically.
+
+This architecture ensures a seamless experience: **Native Speech API** for speed + **GenAI** for intelligence.
